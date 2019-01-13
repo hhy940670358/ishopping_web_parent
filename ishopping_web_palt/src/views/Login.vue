@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import { requestLogin } from '../api/api';
+  import { requestLogin } from '../api/api';    //？？
   //import NProgress from 'nprogress'
   export default {
     data() {
@@ -24,7 +24,7 @@
         logining: false,
         ruleForm2: {
           account: 'admin',
-          checkPass: '123456'
+          checkPass: '123'
         },
         rules2: {
           account: [
@@ -50,21 +50,25 @@
             //_this.$router.replace('/table');
             this.logining = true;
             //NProgress.start();
-            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-            requestLogin(loginParams).then(data => {
-              this.logining = false;
-              //NProgress.done();
-              let { msg, code, user } = data;
-              if (code !== 200) {
-                this.$message({
-                  message: msg,
-                  type: 'error'
+            var loginParams = { name: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+            this.$http.post('/plat/login',loginParams)
+                .then(data=> {
+                    this.logining = false;
+                    //NProgress.done();
+                    let { success, message, resultObj } = data.data; //????
+                    if (!success) {
+                        this.$message({
+                            message: message,
+                            type: 'error'
+                        });
+                    } else {
+                        sessionStorage.setItem('user', JSON.stringify(resultObj));
+                        this.$router.push({ path: '/echarts' });
+                    }
                 });
-              } else {
-                sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/table' });
-              }
-            });
+            // requestLogin(loginParams).then(data => {
+            //
+            // });
           } else {
             console.log('error submit!!');
             return false;

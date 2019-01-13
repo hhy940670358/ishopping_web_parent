@@ -8,6 +8,7 @@ function resolve(dir) {
 }
 
 module.exports = {
+  //入口
   entry: {
     app: './src/main.js'
   },
