@@ -9,6 +9,8 @@ import Page4 from './views/nav2/Page4.vue'
 import Page5 from './views/nav2/Page5.vue'
 import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
+import Brand from './views/product/Brands.vue'
+import ProductType from './views/product/ProductType.vue'
 
 let routes = [
     {
@@ -39,8 +41,8 @@ let routes = [
         name: '商品模块',
         iconCls: 'el-icon-message',//图标样式class
         children: [
-            { path: '/brands', component: Main, name: '商品品牌' },
-            { path: '/productType', component: Table, name: '商品类型' },
+            { path: '/productBrands', component: Brand, name: '商品品牌' },
+            { path: '/productType', component: ProductType, name: '商品类型' },
             { path: '/productTemplate', component: Form, name: '商品模板' },
             { path: '/productViewProperties', component: user, name: '商品规格' },
             { path: '/ProductManager', component: Page4, name: '商品管理' },
